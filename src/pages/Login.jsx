@@ -1,11 +1,13 @@
 import React from "react";
-// import firebase from 'firebase/compat/app';
-// import firebaseui from 'firebaseui';
-// import 'firebaseui/dist/firebaseui.css';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 const Login = () => {
    return (
-      <h1>Loading... Login</h1>
+      <React.Fragment>
+         <h1>Loading ...</h1>
+      </React.Fragment>
    );
 };
 
