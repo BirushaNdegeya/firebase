@@ -1,29 +1,28 @@
-import React from "react";
-// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import React, { useEffect } from "react";
+import * as firebaseui from "firebaseui";
+import 'firebaseui/dist/firebaseui.css';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import { app } from '../config';
 
-// Configure FirebaseUI.
-const uiConfig = {
-   // Popup signin flow rather than redirect flow.
-   signInFlow: 'popup',
-   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-   signInSuccessUrl: '/signedIn',
-   // We will display Google and Facebook as auth providers.
-   signInOptions: [
-     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-   ],
- };
+const SignUp = (props) => {
+   useEffect(() => {
+      const ui = firebaseui.auth.AuthUI.getInstance || new firebaseui.auth.AuthUI(props.auth)
+      ui.start('.sign-up-container', {
+         signInOptions: [
+            {
+               porvider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+               requireDisplayName: false,
+            }
+         ],
+         signSuccessUrl: '/authenticated',
+         privacyPolicyUrl: '/'
+      }) 
+   }, [props.auth]);
 
-const SignUp = () => {
+   
    return (
-      <div>
-      <h1>My App</h1>
-      <p>Please sign-in:</p>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    </div>
+      <div className="sign-up-container">
+         <h1>Loading...</h1>
+      </div>
    );
 };
 
